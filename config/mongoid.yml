@@ -1,8 +1,30 @@
+development:
+  # Configure available database clients. (required)
+  clients:
+    # Defines the default client. (required)
+    default:
+      # Mongoid can connect to a URI accepted by the driver:
+      uri: <%= ENV['MONGODB_URI'] %>
+      options:
+        server_selection_timeout: 5
+    
+test:
+  clients:
+    default:
+      database: render_rails_mongodb_test
+      hosts:
+        - localhost:27017
+      options:
+        read:
+          mode: :primary
+        max_pool_size: 1
+
 production:
   # Configure available database clients. (required)
   clients:
     # Defines the default client. (required)
     default:
       # Mongoid can connect to a URI accepted by the driver:
-      # uri: mongodb://user:password@mongodb.domain.com:27017/render_rails_mongodb_development
       uri: <%= ENV['MONGODB_URI'] %>
+      options:
+        server_selection_timeout: 5
